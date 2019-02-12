@@ -1,0 +1,121 @@
+// Colors
+$color-white: #FFF;
+$color-purple: #511EF4;
+$color-orange: #F4511E;
+$color-blue: #1EC1F4;
+$color-green: #1EF451;
+$color-pink: #F41EC1;
+$color-yellow: #F4BC1E;
+$color-cyan: #1EF4BC;
+
+// Heights
+$height-menu: 60px;
+$height-section: 300px;
+$height-section-sm: 200px;
+$height-section-lg: 400px;
+$height-section-xl: 600px;
+
+// Fonts
+$font-family: 'Libre Franklin', sans-serif;
+$font-weight: 700;
+$font-size: 24px;
+
+// Breakpoints
+$bp-mobile: 400px;
+$bp-tablet: 960px;
+
+// Mixin for media queries
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media only screen and (max-width: $bp-mobile) { @content; }
+  } @else if $size == tablet-up {
+    @media only screen and (min-width: $bp-mobile + 1) { @content; }
+  } @else if $size == desktop-up {
+    @media only screen and (min-width: $bp-tablet + 1) { @content; }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  color: $color-white;
+}
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: $height-menu;
+  @include for-size(desktop-up) {
+    width: $bp-tablet;
+    margin: 0 auto;
+  }
+}
+
+%item {
+  width: 100%;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  @extend %item;
+  height: $height-section;
+}
+
+.menu {
+  @extend %item;
+  height: $height-menu;
+  background-color: $color-purple;
+  position: fixed;
+}
+
+.header {
+  background-color: $color-orange;
+  @include for-size(desktop-up) { height: $height-section-lg; }
+}
+
+.content {
+  background-color: $color-blue;
+  height: $height-section-xl;
+  @include for-size(desktop-up) { order: 2; }
+}
+
+
+.sign-up {
+  background-color: $color-green;
+  @include for-size(tablet-up) { width: 50%; }
+  @include for-size(desktop-up) {
+    width: 100%;
+    height: $height-section-sm;
+    order: 1;
+  }
+}
+
+%feature {
+  background-color: $color-white;
+  @include for-size(tablet-up) { width: 50%; }
+  @include for-size(desktop-up) { width: 33.3%; }
+}
+
+.feature-1 {
+  @extend %feature;
+  background-color: $color-pink;
+}
+
+.feature-2 {
+  @extend %feature;
+  background-color: $color-yellow;
+}
+
+.feature-3 {
+  @extend %feature;
+  background-color: $color-cyan;
+}
